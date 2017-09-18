@@ -1,8 +1,8 @@
 INF102v2017 assignment 1
 =======================================
-##Due date: 2017-09-29
+# Due date: 2017-09-29 #
 
-## Instructions for submitting 
+# Instructions for submitting # 
 
 All source code should be placed in the ```src``` folder. Include all source code necessary to compile and run your programs.
 
