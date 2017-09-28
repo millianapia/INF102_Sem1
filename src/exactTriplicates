@@ -1,0 +1,90 @@
+import java.io.Console;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Merge;
+import edu.princeton.cs.algs4.StdOut;
+
+public class exactTriplicates {
+
+	/* Method that merges all 4 lists to 1 list. With the use of */
+	public static List<String> merge() {
+		String[] files = { "file1.txt", "file2.txt", "file3.txt", "file4.txt" };
+		List[] fileList = readFiles(files);
+		List<String> merged = new ArrayList<String>();
+
+		for (int i = 0; i < fileList.length; i++) {
+			merged.addAll(fileList[i]);
+		}
+		
+		/* Ignores upper case letters and treats them as euqals as 
+		 * lower case*/
+		Collections.sort(merged, String.CASE_INSENSITIVE_ORDER);
+
+		
+		/* @moreThan is used to check if word is used 3 times or not */
+		List<String> moreThan = new ArrayList<String>();
+		for (int i = 0; i < merged.size(); i++) {
+			if (Collections.frequency(merged, merged.get(i)) == 3 && !moreThan.contains(merged.get(i))) {
+				moreThan.add(merged.get(i));
+			}
+		}
+
+		
+		/* inThreeLists is a list with words that is used 3 times*/
+		List<String> inThreeLists = new ArrayList<String>();
+
+		for (int i = 0; i < moreThan.size(); i++) {
+			int occurences = 0;
+			for (int j = 0; j < fileList.length; j++) {
+				if (fileList[j].contains(moreThan.get(i))) {
+					occurences++;
+				}
+			}
+
+			if (occurences == 3) {
+				inThreeLists.add(moreThan.get(i));
+			}
+
+			occurences = 0;
+		}
+
+		return inThreeLists;
+	}
+
+	/*
+	 * Method that reads file names and imports them. and adds them to lists,
+	 * returns list
+	 */
+	private static List[] readFiles(String[] files) {
+		List[] fileList = new List[files.length];
+		for (int i = 0; i < files.length; i++) {
+			try {
+				List<String> list = new ArrayList<String>();
+				File file = new File(files[i].toString());
+				Scanner in = new Scanner(file);
+
+				while (in.hasNext()) {
+					list.add(in.next());
+				}
+
+				fileList[i] = list;
+
+			} catch (FileNotFoundException couldntOpen) {
+				StdOut.println("Could not open the file");
+			}
+		}
+
+		return fileList;
+	}
+
+	/* Merges values into a list of string with the use of method merge */
+	public static void main(String args[]) {
+
+		List<String> values = merge();
+		System.out.println(values);
+	}
+
+}
