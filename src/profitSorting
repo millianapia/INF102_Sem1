@@ -1,0 +1,74 @@
+
+import edu.princeton.cs.algs4.Merge;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.BinarySearch;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Stopwatch;
+
+import java.lang.*;
+import java.util.Arrays;
+
+public class profitSorting {
+
+	public static void main(String[] args) {
+		int arraySize = (int) Math.pow(10, 6);
+		int[] list = new int[arraySize];
+		StdOut.println("Enter times to be searched: ");
+		int timesTBSearched = StdIn.readInt();
+		int[] numberList = new int[timesTBSearched];
+		Comparable[] binaryComparableList = new Comparable[arraySize];
+
+		listGenerator(list, arraySize);
+		listGenerator(numberList, arraySize);
+		// ------------------------------------------
+		/* Linear algorithm - uses linearsearch method */
+		Stopwatch linearTimer = new Stopwatch();
+		for (int i = 0; i < timesTBSearched; i++) {
+			linearSearch(list, numberList[i], timesTBSearched);
+		}
+		double linearTime = linearTimer.elapsedTime();
+		StdOut.println("Linear Time: " + linearTime);
+
+		// -------------------------------------
+		/*
+		 * Binary algorithm - first convert from the regular list to the
+		 * comparable list takes time how long it takes to sort with merge sort
+		 * and then uses binary search
+		 */
+		for (int i = 0; i < arraySize; i++) {
+			binaryComparableList[i] = list[i];
+		}
+
+		Stopwatch binaryTimer = new Stopwatch();
+
+		Merge.sort(binaryComparableList);
+		for (int i = 0; i < timesTBSearched; i++) {
+			Arrays.binarySearch(binaryComparableList, numberList[i]);
+		}
+		double binaryTime = binaryTimer.elapsedTime();
+		StdOut.println("Binary time: " + binaryTime);
+
+	}
+
+	/* Searches through list we send in, in a linear way */
+	private static void linearSearch(int[] linearList, int n, int timesTBSearched) {
+		int count = 0;
+		for (int i = 0; i < linearList.length; i++) {
+			if (linearList[i] == n && count == timesTBSearched) {
+				count++;
+				break;
+
+			}
+		}
+
+	}
+
+	/* Generates random values for list that we send in */
+	private static int[] listGenerator(int[] list, int arraySize) {
+		for (int i = 0; i < list.length; i++) {
+			list[i] = (int) ((0 + arraySize) * Math.random());
+		}
+		return list;
+	}
+
+}
