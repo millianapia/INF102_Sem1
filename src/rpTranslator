@@ -1,0 +1,50 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class rpTranslator {
+
+	/* Method that contains all operators used in the converting
+	 * which checks if char c is an operator or not*/
+	private boolean isOperator(char c) {
+		if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
+			return true;
+		return false;
+	}
+	
+	
+	
+	/* Method that converst the string to a stack with 
+	 * the strings to infix*/
+	public String convert(String reversePolish) {
+		Stack<String> reversePolishStack = new Stack<>();
+
+		for (int i = 0; i < reversePolish.length(); i++) {
+			char c = reversePolish.charAt(i);
+			if (isOperator(c)) {
+
+				String a = reversePolishStack.pop();
+				String b = reversePolishStack.pop();
+
+				reversePolishStack.push("(" + a + c + b + ")");
+			} else
+				reversePolishStack.push("" + c);
+		}
+
+		return reversePolishStack.pop();
+	}
+
+	
+	
+	
+	/*Main method with reading reverse polish notation and sending 
+	 * it in, in convert method*/
+	public static void main(String[] args) {
+		rpTranslator RPN = new rpTranslator();
+		StdOut.println("Enter reverse polish notation(with no space between): ");
+		String reversePolish = StdIn.readLine();
+		StdOut.println("Infix: " + RPN.convert(reversePolish));
+	}
+}
