@@ -5,6 +5,9 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 public class rpTranslator {
+// made by Malin jakobsen - xun007
+// team member Renate Nikolajeva
+
 
 	/* Method that contains all operators used in the converting
 	 * which checks if char c is an operator or not*/
