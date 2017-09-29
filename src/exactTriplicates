@@ -9,6 +9,9 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class exactTriplicates {
 
+// made by Malin Jakobsen - xun007
+// team member Renate Nikolajeva 
+
 	/* Method that merges all 4 lists to 1 list. With the use of */
 	public static List<String> merge() {
 		String[] files = { "file1.txt", "file2.txt", "file3.txt", "file4.txt" };
