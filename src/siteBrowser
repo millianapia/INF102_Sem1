@@ -6,6 +6,8 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 public class siteBrowser {
+// made by Malin jakobsen - xun007
+// team member Renate Nikolajeva 
 
 	public static void main(String[] args) {
 		Stack<String> inputStack = new Stack<String>(); // stack with input from file
