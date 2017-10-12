@@ -1,0 +1,45 @@
+1. The result is in reverse order, also make support 
+for more than one digit numbers. You can use 
+
+	String.split();
+	
+2. Should not crash :(
+
+On input:
+
+	a
+	*back*
+	*back*
+
+it fails with
+	
+	Exception in thread "main" java.util.EmptyStackException
+		at java.util.Stack.peek(Unknown Source)
+		at java.util.Stack.pop(Unknown Source)
+		at siteBrowser.main(siteBrowser.java:38)
+
+3. Your analysis should comment on the rest of the code as well,
+perhaps you will need to rewrite the Collections.frequency()
+yourself, since I could not google it's complexity.
+
+4. Using Merge.sort() on objects is way slower than using array,
+but the results seem OK on my machine. Try using Arrays.sort()
+and Arrays.binarySearch(), to see if you get anything reasonable.
+
+In linearSearch() the use of count has no sense:
+private static void linearSearch(int[] linearList, int n, int timesTBSearched) {
+		int count = 0;
+		for (int i = 0; i < linearList.length; i++) {
+			if (linearList[i] == n && count == timesTBSearched) {
+				count++;
+				break;
+
+			}
+		}
+
+	} 
+
+
+CONDITIONAL PASS
+
+You can correct your work til 20. 10.
