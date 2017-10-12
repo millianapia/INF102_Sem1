@@ -6,9 +6,13 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 public class siteBrowser {
-// made by Malin jakobsen - xun007
-// team member Renate Nikolajeva 
-
+	/**
+	 *  @author xun007
+	 *  @team rni006
+	 *
+	 */
+	
+	
 	public static void main(String[] args) {
 		Stack<String> inputStack = new Stack<String>(); // stack with input from file
 		Stack<String> placeholderStack = new Stack<String>(); // stack we use to move through input stack
@@ -23,15 +27,26 @@ public class siteBrowser {
 		 * different stacks. This is because we can only peek, pop and push in
 		 * stacks.
 		 */
+		boolean isFirst = false;
 		for (int i = 0; i < N; i++) {
 			look = historyStack.peek();
 
-			if (historyStack.peek().equals("*back*")) {
+			if (historyStack.peek().equals("*back*") && isFirst == false) {
+				if(inputStack.size() > 1){
 				placeholderStack.push(inputStack.pop());
 				System.out.println(inputStack.peek());
 				historyStack.pop();
+				}
+				else if(inputStack.size() <= 1){
+					StdOut.println("[First page, can not go back]");
+					isFirst = true;
+					historyStack.pop();
+				}
+				
+				isFirst = false;
 
 			} else if (historyStack.peek().equals("*forward*")) {
+				isFirst = false;
 				if (placeholderStack.isEmpty()) {
 					System.out.println("[Warning: last website]");
 				} else if (!placeholderStack.isEmpty()) {
@@ -41,6 +56,7 @@ public class siteBrowser {
 
 				historyStack.pop();
 			} else {
+				isFirst = false;
 				if (i != 0) {
 					System.out.println(look);
 					inputStack.push(look);
@@ -98,3 +114,4 @@ public class siteBrowser {
 	}
 
 }
+
