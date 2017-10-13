@@ -8,9 +8,11 @@ import edu.princeton.cs.algs4.Merge;
 import edu.princeton.cs.algs4.StdOut;
 
 public class exactTriplicates {
-
-// made by Malin Jakobsen - xun007
-// team member Renate Nikolajeva 
+	/**
+	 *  @author xun007
+	 *  @team rni006
+	 *
+	 */
 
 	/* Method that merges all 4 lists to 1 list. With the use of */
 	public static List<String> merge() {
@@ -21,22 +23,31 @@ public class exactTriplicates {
 		for (int i = 0; i < fileList.length; i++) {
 			merged.addAll(fileList[i]);
 		}
-		
-		/* Ignores upper case letters and treats them as euqals as 
-		 * lower case*/
+
+		/*
+		 * Ignores upper case letters and treats them as euqals as lower case
+		 */
 		Collections.sort(merged, String.CASE_INSENSITIVE_ORDER);
 
-		
-		/* @moreThan is used to check if word is used 3 times or not */
 		List<String> moreThan = new ArrayList<String>();
-		for (int i = 0; i < merged.size(); i++) {
-			if (Collections.frequency(merged, merged.get(i)) == 3 && !moreThan.contains(merged.get(i))) {
-				moreThan.add(merged.get(i));
-			}
-		}
 
-		
-		/* inThreeLists is a list with words that is used 3 times*/
+		for (int i = 0; i < merged.size(); i++) {
+			int teller = 0;
+			for (int j = 0; j < merged.size(); j++) {
+				if (merged.get(i).equals(merged.get(j))) {
+
+					teller++;
+				} else if (teller == 3 && !moreThan.contains(merged.get(i))) {
+					moreThan.add(merged.get(i));
+
+				}
+			}
+
+		}
+	
+
+
+		/* inThreeLists is a list with words that is used 3 times */
 		List<String> inThreeLists = new ArrayList<String>();
 
 		for (int i = 0; i < moreThan.size(); i++) {
