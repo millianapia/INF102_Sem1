@@ -28,7 +28,7 @@ public class profitSorting {
 		/* Linear algorithm - uses linearsearch method */
 		Stopwatch linearTimer = new Stopwatch();
 		for (int i = 0; i < timesTBSearched; i++) {
-			linearSearch(list, numberList[i], timesTBSearched);
+			linearSearch(list, numberList[i]);
 		}
 		double linearTime = linearTimer.elapsedTime();
 		StdOut.println("Linear Time: " + linearTime);
@@ -55,11 +55,9 @@ public class profitSorting {
 	}
 
 	/* Searches through list we send in, in a linear way */
-	private static void linearSearch(int[] linearList, int n, int timesTBSearched) {
-		int count = 0;
+	private static void linearSearch(int[] linearList, int n) {
 		for (int i = 0; i < linearList.length; i++) {
-			if (linearList[i] == n && count == timesTBSearched) {
-				count++;
+			if (linearList[i] == n) {
 				break;
 
 			}
@@ -76,3 +74,4 @@ public class profitSorting {
 	}
 
 }
+
